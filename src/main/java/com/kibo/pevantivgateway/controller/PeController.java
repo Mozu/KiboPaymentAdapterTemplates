@@ -21,6 +21,27 @@ public class PeController {
         public RS handle() throws Exception;
     }
 
+
+    private String fromConfiguration(PaymentRequest request, String name) throws Exception {
+        String value = null;
+        AdapterContext context = request.getContext();
+
+        List<Map<String, String>> settingsMap = context.getSettings();
+        if(settingsMap == null)
+            throw new Exception("Settings missing.");
+        for (Map<String, String> setting : settingsMap) {
+            if (name.equalsIgnoreCase(setting.get("key"))) {
+                value = setting.get("value");
+                break;
+            }
+        }
+
+        if (value == null) {
+            throw new Exception("Missing configuration value '" + name + "'.");
+        }
+        return value;
+    }
+
     private <RS extends GatewayResponse> RS handleRequest(PaymentRequest request, HandleResponse<RS> handler, Class<?> responseClass) throws IllegalAccessException, InstantiationException {
         try {
             return handler.handle();
