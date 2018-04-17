@@ -4,12 +4,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
 public class AdapterContext implements Serializable {
     @Getter
     @Setter
-    Map<String, String> settings;
+    List<Map<String, String>> settings;
     @Getter
     @Setter
     Boolean isSandbox;
@@ -18,7 +19,7 @@ public class AdapterContext implements Serializable {
     Boolean isTestMode;
     @Getter
     @Setter
-    Map<String, String> configuration;
+    List<Map<String, String>> configuration;
     @Getter
     @Setter
     Map<String, String> transaction;

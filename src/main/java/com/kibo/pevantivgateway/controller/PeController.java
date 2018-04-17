@@ -1,5 +1,6 @@
 package com.kibo.pevantivgateway.controller;
 
+import com.kibo.pevantivgateway.dto.common.AdapterContext;
 import com.kibo.pevantivgateway.dto.request.AuthorizeRequest;
 import com.kibo.pevantivgateway.dto.request.CaptureRequest;
 import com.kibo.pevantivgateway.dto.request.PaymentRequest;
@@ -9,11 +10,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Controller
 @RequestMapping(value = "/pevantiv")
+/**
+ * Controller to handle the calls.
+ *
+ * To implement, call 'handleRequest' with a 'HandleResponse' lambda.
+ *
+ * This reduces the amount of boilerplate and keeps the error handling in one place.
+ *
+ * The lambdas at the moment just throw an exception, which will cause the handleRequest
+ * method to return a connection status of 'Error'.
+ */
 public class PeController {
     private static final Logger logger = Logger.getLogger(PeController.class.getSimpleName());
 
