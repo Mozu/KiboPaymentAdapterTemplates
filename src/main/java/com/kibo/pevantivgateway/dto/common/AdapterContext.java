@@ -19,8 +19,8 @@ public class AdapterContext implements Serializable {
     Boolean isTestMode;
     @Getter
     @Setter
-    List<Map<String, String>> configuration;
+    List<KeyValueTuple> configuration;
     @Getter
     @Setter
-    Map<String, String> transaction;
+    Transaction transaction;
 }
