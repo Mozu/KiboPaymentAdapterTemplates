@@ -88,14 +88,6 @@
     <build>
         <resources>
             <resource>
-                <directory>src/Docker/</directory>
-                <filtering>true</filtering>
-                <targetPath>${project.build.directory}/filteredDocker/</targetPath>
-                <includes>
-                    <include>Dockerfile</include>
-                </includes>
-            </resource>
-            <resource>
                 <directory>src/main/resources/</directory>
                 <targetPath>${project.build.directory}/classes/</targetPath>
                 <excludes>
@@ -132,49 +124,6 @@
                 <configuration>
                     <includeSystemScope>true</includeSystemScope>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>0.4.11</version>
-                <executions>
-                    <execution>
-                        <id>default</id>
-                        <goals>
-                            <goal>build</goal>
-                            <goal>push</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <imageName>${project.artifactId}</imageName>
-                    <dockerDirectory>${project.build.directory}/filteredDocker/</dockerDirectory>
-                    <resources>
-                        <resource>
-                            <targetPath>/</targetPath>
-                            <directory>${project.build.directory}</directory>
-                            <include>${project.build.finalName}.jar</include>
-                        </resource>
-                    </resources>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <tasks>
-                                <copy verbose="true"
-                                      file="${project.build.directory}/classes/Dockerfile"
-                                      tofile="${project.build.directory}/filteredDocker/Dockerfile"/>
-                            </tasks>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

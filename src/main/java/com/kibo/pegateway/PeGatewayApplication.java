@@ -11,7 +11,6 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableAutoConfiguration
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.kibo"})
-@EntityScan
 public class PeGatewayApplication {
     public static void main(String[] args) {
         SpringApplication.run(PeGatewayApplication.class, args);

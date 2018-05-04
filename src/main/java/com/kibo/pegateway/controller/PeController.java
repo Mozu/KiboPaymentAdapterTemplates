@@ -1,6 +1,8 @@
 package com.kibo.pegateway.controller;
 
 import com.kibo.pegateway.IPeService;
+import com.kibo.pegateway.dto.override.base.IGatewayAuthorizeResponse;
+import com.kibo.pegateway.dto.override.base.IGatewayTransactionResponse;
 import com.mozu.api.contracts.paymentservice.extensibility.v1.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.info.BuildProperties;
@@ -28,7 +30,7 @@ import java.util.logging.Logger;
  * The lambdas at the moment just throw an exception, which will cause the handleRequest
  * method to return a connection status of 'Error'.
  */
-public abstract class PeController implements IPeController {
+public class PeController {
     private static final Logger logger = Logger.getLogger(PeController.class.getSimpleName());
 
     @Autowired
@@ -44,7 +46,7 @@ public abstract class PeController implements IPeController {
      *
      * @param <RS> The response type for the call.
      */
-    public interface HandleResponse<RS extends Object> {
+    public interface HandleResponse<RS> {
         /**
          * Extend this to handle the call.
          *
@@ -54,13 +56,38 @@ public abstract class PeController implements IPeController {
          * @return The gateway response object corresponding to this method.
          * @throws Exception Thrown on any error.
          */
-        public RS handle() throws Exception;
+        RS handle() throws Exception;
+    }
+
+    public void cleanResponse(IGatewayTransactionResponse response) {
+        if (StringUtils.isEmpty(response.getResponseCode())) {
+            response.setResponseCode("");
+        }
+        if (StringUtils.isEmpty(response.getResponseText())) {
+            response.setResponseText("");
+        }
+        if (StringUtils.isEmpty(response.getTransactionId())) {
+            response.setTransactionId("");
+        }
+        if(response.getIsDeclined() && response.getRemoteConnectionStatus() == ConnectionStatuses.Success)
+            response.setRemoteConnectionStatus(ConnectionStatuses.Reject);
+        if(IGatewayAuthorizeResponse.class.isAssignableFrom(response.getClass())) {
+            IGatewayAuthorizeResponse temp = (IGatewayAuthorizeResponse)response;
+            if (StringUtils.isEmpty(temp.getAuthCode())) {
+                temp.setAuthCode("");
+            }
+            if (StringUtils.isEmpty(temp.getAvsCodes())) {
+                temp.setAvsCodes("");
+            }
+            if (StringUtils.isEmpty(temp.getCvV2Codes())) {
+                temp.setCvV2Codes("");
+            }
+        }
     }
 
     /**
      * Call this method with a lambda to handle the request.
      *
-     * @param request The request object to handle.
      * @param handler The lambda to call to handle the request.
      * @param responseClass The response class.  The call will create a response of this type to return an exception.
      * @param <RS> The response type.
@@ -68,16 +95,18 @@ public abstract class PeController implements IPeController {
      * @throws IllegalAccessException Thrown on illegal access, converted to 500 by Spring.
      * @throws InstantiationException Thrown on instantiation exception, converted to 500 by Spring.
      */
-    private <RS extends Object> RS handleRequest(Object request, HandleResponse<RS> handler, Class<?> responseClass) throws Exception {
+    private <RS> RS handleRequest(HandleResponse<RS> handler, Class<?> responseClass) throws Exception {
         try {
             RS ret = handler.handle();
-            EResponseCleaners.cleanResponse(ret);
+            cleanResponse((IGatewayTransactionResponse)ret);
             return ret;
         }
         catch (Exception e) {
             logger.log(Level.SEVERE, "Calling vantiv", e);
-            Object response = (Object) responseClass.newInstance();
-            EResponseCleaners.errorResponse(response, e);
+            IGatewayTransactionResponse response = (IGatewayTransactionResponse) responseClass.newInstance();
+            response.setIsDeclined(true);
+            response.setRemoteConnectionStatus(ConnectionStatuses.Error);
+            response.setResponseText(e.toString());
             return (RS) response;
         }
     }
@@ -109,40 +138,30 @@ public abstract class PeController implements IPeController {
     @RequestMapping(method = RequestMethod.POST, produces = "application/json", value = "/authorize")
     @ResponseBody
     public GatewayAuthorizeResponse authorize(@RequestBody GatewayAuthorizationRequest authorizeRequest) throws Exception {
-        return handleRequest(authorizeRequest, () -> {
-            return peService.authorize(authorizeRequest);
-        }, GatewayAuthorizeResponse.class);
+        return handleRequest(() -> peService.authorize(authorizeRequest), GatewayAuthorizeResponse.class);
     }
 
     @RequestMapping(method = RequestMethod.POST, produces = "application/json", value = "/capture")
     @ResponseBody
     public GatewayCaptureResponse capture(@RequestBody CaptureRequest captureRequest) throws Exception {
-        return handleRequest(captureRequest, () -> {
-            return peService.capture(captureRequest);
-        }, GatewayCaptureResponse.class);
+        return handleRequest(() -> peService.capture(captureRequest), GatewayCaptureResponse.class);
     }
 
     @RequestMapping(method = RequestMethod.POST, produces = "application/json", value = "/credit")
     @ResponseBody
     public GatewayCreditResponse credit(@RequestBody CaptureRequest creditRequest) throws Exception {
-        return handleRequest(creditRequest, () -> {
-            return peService.credit(creditRequest);
-        }, GatewayCreditResponse.class);
+        return handleRequest(() -> peService.credit(creditRequest), GatewayCreditResponse.class);
     }
 
     @RequestMapping(method = RequestMethod.POST, produces = "application/json", value = "/void")
     @ResponseBody
     public GatewayVoidResponse voidTransaction(@RequestBody CaptureRequest voidRequest) throws Exception {
-        return handleRequest(voidRequest, () -> {
-            return peService.doVoid(voidRequest);
-        }, GatewayVoidResponse.class);
+        return handleRequest(() -> peService.doVoid(voidRequest), GatewayVoidResponse.class);
     }
 
     @RequestMapping(method = RequestMethod.POST, produces = "application/json", value = "/authorizeandcapture")
     @ResponseBody
     public GatewayCaptureResponse authorizeAndCapture(@RequestBody CaptureRequest authorizeAndCaptureRequest) throws Exception {
-        return handleRequest(authorizeAndCaptureRequest, () -> {
-            return peService.authorizeAndCapture(authorizeAndCaptureRequest);
-        }, GatewayCaptureResponse.class);
+        return handleRequest(() -> peService.authorizeAndCapture(authorizeAndCaptureRequest), GatewayCaptureResponse.class);
     }
 }

@@ -1,4 +1,4 @@
-package com.kibo.pegateway.dto.override;
+package com.kibo.pegateway.dto.override.jackson.common;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
