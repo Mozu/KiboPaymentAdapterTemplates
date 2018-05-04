@@ -1,10 +1,8 @@
-package com.kibo.pegateway.dto.override.base;
+package com.kibo.pegateway.dto.base;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mozu.api.contracts.paymentservice.extensibility.v1.AdapterContext;
 import com.mozu.api.contracts.paymentservice.extensibility.v1.CardInformation;
 import com.mozu.api.contracts.paymentservice.extensibility.v1.CustomerInformation;
-import com.mozu.api.contracts.paymentservice.extensibility.v1.KeyValueTuple;
 
 import java.util.Map;
 

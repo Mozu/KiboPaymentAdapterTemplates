@@ -1,10 +1,7 @@
-package com.kibo.pegateway.dto.override.base;
+package com.kibo.pegateway.dto.base;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mozu.api.contracts.paymentservice.extensibility.v1.ConnectionStatuses;
-import com.mozu.api.contracts.paymentservice.extensibility.v1.KeyValueTuple;
 
-import java.util.List;
 import java.util.Map;
 
 public interface IGatewayTransactionResponse {

@@ -1,9 +1,9 @@
-package com.kibo.pegateway.dto.override;
+package com.kibo.pegateway.dto.vantiv;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kibo.pegateway.config.JacksonConfig;
-import com.kibo.pegateway.dto.override.common.AdapterContextOverride;
-import com.kibo.pegateway.dto.override.request.GatewayAuthorizationRequestOverride;
+import com.kibo.pegateway.dto.common.AdapterContextOverride;
+import com.kibo.pegateway.dto.request.GatewayAuthorizationRequestOverride;
 import com.mozu.api.contracts.paymentservice.extensibility.v1.AdapterContext;
 import com.mozu.api.contracts.paymentservice.extensibility.v1.GatewayAuthorizationRequest;
 import com.mozu.api.contracts.paymentservice.extensibility.v1.KeyValueTuple;

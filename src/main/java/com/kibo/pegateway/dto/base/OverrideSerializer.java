@@ -1,4 +1,4 @@
-package com.kibo.pegateway.dto.override.base;
+package com.kibo.pegateway.dto.base;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;

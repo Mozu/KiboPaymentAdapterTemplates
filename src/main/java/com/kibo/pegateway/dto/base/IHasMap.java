@@ -1,4 +1,4 @@
-package com.kibo.pegateway.dto.override.base;
+package com.kibo.pegateway.dto.base;
 
 import org.springframework.util.StringUtils;
 

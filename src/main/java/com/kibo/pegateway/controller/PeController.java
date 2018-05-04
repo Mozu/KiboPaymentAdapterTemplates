@@ -1,8 +1,8 @@
 package com.kibo.pegateway.controller;
 
 import com.kibo.pegateway.IPeService;
-import com.kibo.pegateway.dto.override.base.IGatewayAuthorizeResponse;
-import com.kibo.pegateway.dto.override.base.IGatewayTransactionResponse;
+import com.kibo.pegateway.dto.base.IGatewayAuthorizeResponse;
+import com.kibo.pegateway.dto.base.IGatewayTransactionResponse;
 import com.mozu.api.contracts.paymentservice.extensibility.v1.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.info.BuildProperties;

@@ -1,21 +1,19 @@
-package com.kibo.pegateway.dto.override.response;
+package com.kibo.pegateway.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.kibo.pegateway.dto.override.base.IGatewayAuthorizeResponse;
-import com.kibo.pegateway.dto.override.base.IGatewayTransactionResponse;
-import com.kibo.pegateway.dto.override.jackson.common.KeyValueTupleDeserializer;
-import com.kibo.pegateway.dto.override.jackson.common.KeyValueTupleSerializer;
+import com.kibo.pegateway.dto.base.IGatewayAuthorizeResponse;
+import com.kibo.pegateway.dto.common.KeyValueTupleDeserializer;
+import com.kibo.pegateway.dto.common.KeyValueTupleSerializer;
 import com.mozu.api.contracts.paymentservice.extensibility.v1.GatewayAuthorizeResponse;
-import com.mozu.api.contracts.paymentservice.extensibility.v1.GatewayVoidResponse;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Map;
 
-public class GatewayVoidResponseOverride extends GatewayVoidResponse implements IGatewayTransactionResponse, Serializable {
+public class GatewayAuthorizeResponseOverride extends GatewayAuthorizeResponse implements IGatewayAuthorizeResponse, Serializable {
     @Getter
     @Setter
     @JsonSerialize(using = KeyValueTupleSerializer.class)

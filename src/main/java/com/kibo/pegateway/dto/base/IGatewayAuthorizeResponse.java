@@ -1,4 +1,4 @@
-package com.kibo.pegateway.dto.override.base;
+package com.kibo.pegateway.dto.base;
 
 public interface IGatewayAuthorizeResponse extends IGatewayTransactionResponse {
     public void setAuthCode(String authCode);

@@ -1,9 +1,8 @@
 package com.kibo.pegateway.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.kibo.pegateway.dto.override.base.OverrideDeserializerModifier;
-import com.kibo.pegateway.dto.override.base.OverrideSerializerModifier;
+import com.kibo.pegateway.dto.base.OverrideDeserializerModifier;
+import com.kibo.pegateway.dto.base.OverrideSerializerModifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;

@@ -1,9 +1,9 @@
-package com.kibo.pegateway.dto.override;
+package com.kibo.pegateway.dto.vantiv;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kibo.pegateway.config.JacksonConfig;
-import com.kibo.pegateway.dto.override.common.AdapterContextOverride;
+import com.kibo.pegateway.dto.common.AdapterContextOverride;
 import com.mozu.api.contracts.paymentservice.extensibility.v1.AdapterContext;
 import org.junit.Test;
 import org.junit.runner.RunWith;

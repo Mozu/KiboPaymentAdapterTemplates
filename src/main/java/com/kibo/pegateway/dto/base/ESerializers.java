@@ -1,12 +1,12 @@
-package com.kibo.pegateway.dto.override.base;
+package com.kibo.pegateway.dto.base;
 
-import com.kibo.pegateway.dto.override.common.AdapterContextOverride;
-import com.kibo.pegateway.dto.override.request.CaptureRequestOverride;
-import com.kibo.pegateway.dto.override.request.GatewayAuthorizationRequestOverride;
-import com.kibo.pegateway.dto.override.response.GatewayAuthorizeResponseOverride;
-import com.kibo.pegateway.dto.override.response.GatewayCaptureResponseOverride;
-import com.kibo.pegateway.dto.override.response.GatewayCreditResponseOverride;
-import com.kibo.pegateway.dto.override.response.GatewayVoidResponseOverride;
+import com.kibo.pegateway.dto.common.AdapterContextOverride;
+import com.kibo.pegateway.dto.request.CaptureRequestOverride;
+import com.kibo.pegateway.dto.request.GatewayAuthorizationRequestOverride;
+import com.kibo.pegateway.dto.response.GatewayAuthorizeResponseOverride;
+import com.kibo.pegateway.dto.response.GatewayCaptureResponseOverride;
+import com.kibo.pegateway.dto.response.GatewayCreditResponseOverride;
+import com.kibo.pegateway.dto.response.GatewayVoidResponseOverride;
 import com.mozu.api.contracts.paymentservice.extensibility.v1.*;
 
 public enum ESerializers {

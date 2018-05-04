@@ -1,4 +1,4 @@
-package com.kibo.pegateway.dto.override;
+package com.kibo.pegateway.dto.vantiv;
 
 import com.kibo.pegateway.IPeService;
 import com.mozu.api.contracts.paymentservice.extensibility.v1.*;
