@@ -15,12 +15,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ComponentScan(basePackages = "com.kibo")
 @SpringBootTest
-@Import(JacksonConfig.class)
+@Import({JacksonConfig.class, TestBeanProvider.class})
 @Component
 public class TestAdapterContextOverride {
     @Autowired

@@ -23,7 +23,7 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ComponentScan(basePackages = "com.kibo")
 @SpringBootTest
-@Import(JacksonConfig.class)
+@Import({JacksonConfig.class, TestBeanProvider.class})
 @Component
 public class TestAuthorizeOverride {
     @Autowired
