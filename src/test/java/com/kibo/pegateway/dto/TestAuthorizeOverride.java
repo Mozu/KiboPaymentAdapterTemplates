@@ -1,4 +1,4 @@
-package com.kibo.pegateway.dto.vantiv;
+package com.kibo.pegateway.dto;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kibo.pegateway.config.JacksonConfig;
