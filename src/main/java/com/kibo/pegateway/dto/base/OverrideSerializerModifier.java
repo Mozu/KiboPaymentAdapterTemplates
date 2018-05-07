@@ -8,6 +8,9 @@ import com.fasterxml.jackson.databind.ser.BeanSerializerModifier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Overrides serialization for classes in ESerializers.
+ */
 public class OverrideSerializerModifier extends BeanSerializerModifier {
     static Logger logger = Logger.getLogger(OverrideSerializerModifier.class.getSimpleName());
 

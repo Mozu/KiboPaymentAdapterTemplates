@@ -42,10 +42,11 @@ public class AdapterContextOverride extends AdapterContext implements IHasMap {
         productionUrl = IHasMap.getStringFromMap(configurationMap, "productionUrl",true, "configuration");
     }
 
+    @Override
     public void addPropertiesToMap() {
         if(configurationMap == null)
             configurationMap = new HashMap<>();
-        IHasMap.addStringToMap("testingUrl", testingUrl, configurationMap, "configuration");
-        IHasMap.addStringToMap("productionUrl", productionUrl, configurationMap, "configuration");
+        IHasMap.addStringToMap("testingUrl", testingUrl, configurationMap);
+        IHasMap.addStringToMap("productionUrl", productionUrl, configurationMap);
     }
 }

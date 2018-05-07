@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Overrides the KeyValueTuple serializer to read from a map.
+ */
 public class KeyValueTupleSerializer extends JsonSerializer<Map<String, Object>> {
     @Override
     public void serialize(Map<String, Object> stringObjectMap, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException, JsonProcessingException {

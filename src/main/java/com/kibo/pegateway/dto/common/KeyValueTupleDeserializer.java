@@ -13,6 +13,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Overrides the KeyValueTuple serializer
+ * to convert the values into a map.
+ */
 public class KeyValueTupleDeserializer extends JsonDeserializer<HashMap<String, Object>> {
     @Override
     public HashMap<String, Object> deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {

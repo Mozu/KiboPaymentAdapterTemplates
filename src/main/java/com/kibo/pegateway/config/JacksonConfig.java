@@ -9,6 +9,11 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 @Configuration
 public class JacksonConfig {
+    /**
+     * This sets up the modifiers that change
+     * the Jackson behavior.
+     * @return The mapper builder.
+     */
     @Bean
     public Jackson2ObjectMapperBuilder jackson2ObjectMapperBuilder() {
         Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder();

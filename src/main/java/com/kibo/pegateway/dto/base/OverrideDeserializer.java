@@ -8,10 +8,26 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 
+/**
+ * Overridden deserializer to select a different class based on the contents of ESerializers
+ * so that overridden classes can be substituted in contract classes.
+ * @param <R> The type of the target class that will replace the source class.
+ */
 public class OverrideDeserializer<R extends Object> extends JsonDeserializer<R> {
+    /*
+     * Contains the default deserializer to chain to.
+     */
     JsonDeserializer<Object> defaultDeserializer;
+    /*
+     * Contains the class to substitute.
+     */
     Class targetClass;
 
+    /**
+     * Called to set the default deserializer and target class.
+     * @param defaultDeserializer The default deserializer to chain to.
+     * @param targetClass The target class to substitute.
+     */
     public void init(JsonDeserializer<Object> defaultDeserializer, Class targetClass) {
         this.defaultDeserializer = defaultDeserializer;
         this.targetClass = targetClass;
@@ -31,6 +47,11 @@ public class OverrideDeserializer<R extends Object> extends JsonDeserializer<R> 
         }
     }
 
+    /**
+     * Handle any mapping from maps to properties.
+     * @param object The target class object to process.
+     * @throws Exception Thrown on any error, most likely missing or invalid properties.
+     */
     protected void postProcess(R object) throws Exception {
         if(IHasMap.class.isAssignableFrom(object.getClass())) {
             ((IHasMap)object).setPropertiesFromMap();

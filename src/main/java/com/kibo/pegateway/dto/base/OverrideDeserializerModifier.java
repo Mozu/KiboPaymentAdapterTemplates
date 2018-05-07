@@ -8,6 +8,9 @@ import com.fasterxml.jackson.databind.deser.BeanDeserializerModifier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Overrides the deserializer for classes listed in ESerializers.
+ */
 public class OverrideDeserializerModifier extends BeanDeserializerModifier {
     static Logger logger = Logger.getLogger(OverrideDeserializerModifier.class.getSimpleName());
 

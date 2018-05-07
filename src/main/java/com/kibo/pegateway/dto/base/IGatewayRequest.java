@@ -6,6 +6,10 @@ import com.mozu.api.contracts.paymentservice.extensibility.v1.CustomerInformatio
 
 import java.util.Map;
 
+/**
+ * This allows the service to treat gateway requests
+ * in a generic fashion.
+ */
 public interface IGatewayRequest {
     public void setAdditionalDataMap(Map<String, Object> additionalDataMap);
 
