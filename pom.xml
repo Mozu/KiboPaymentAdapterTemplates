@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.kibo</groupId>
-    <artifactId>pe-skeletal-gateway</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <artifactId>kibo-gateway-pe-skeleton</artifactId>
+    <version>1.2-SNAPSHOT</version>
 
 
     <properties>
